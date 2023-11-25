@@ -1,8 +1,8 @@
-import { VariantType, SnackbarKey, SnackbarMessage } from 'notistack';
 import { createSlice } from '@reduxjs/toolkit';
+import { SnackbarKey, SnackbarMessage, VariantType } from 'notistack';
 import { RootState } from './store';
 
-export type NotificationState = {
+type NotificationState = {
   message: SnackbarMessage;
   variant: VariantType;
   key: SnackbarKey;
@@ -28,4 +28,4 @@ export const { openAlert } = notificationSlice.actions;
 
 export const notificationSelector = ({ notification }: RootState) => notification;
 
-export default notificationSlice.reducer;
+export default notificationSlice;

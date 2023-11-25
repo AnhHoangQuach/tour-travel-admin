@@ -1,4 +1,4 @@
-import { ArrowDropDown, ArrowLeft, SettingsOutlined } from '@mui/icons-material';
+import { ArrowDropDown, ArrowLeft, DocumentScanner, SettingsOutlined, TravelExplore } from '@mui/icons-material';
 import { Collapse, List, ListItemButton, ListItemText } from '@mui/material';
 import { styled } from '@mui/system';
 import { useState } from 'react';
@@ -71,6 +71,8 @@ const Menu = () => {
   return (
     <List className='flex flex-col gap-1'>
       <MenuItem {...privateRoute.home} icon={<SettingsOutlined />} />
+      <MenuItem {...privateRoute.travel} icon={<TravelExplore />} />
+      <MenuItem {...privateRoute.order} icon={<DocumentScanner />} />
     </List>
   );
 };

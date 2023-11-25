@@ -30,7 +30,7 @@ type SearchController = {
 };
 
 type CommonRecordType = {
-  id: string;
+  id: number;
   createdAt: string;
   updatedAt: string;
 };

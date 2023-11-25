@@ -1,15 +1,14 @@
-import { RoleEnum } from 'utils/enum';
-
 type ProfileRecordType = UserRecordType & {
   isLoggedIn: boolean;
 };
 
 type UserRecordType = {
-  id?: string;
+  id?: number;
   createdAt?: string;
   updatedAt?: string;
   name?: string;
-  role?: RoleEnum;
+  role?: string;
+  email?: string;
 };
 
 type UserPaginateType = PaginateType & {
@@ -17,3 +16,14 @@ type UserPaginateType = PaginateType & {
 };
 
 type UserParams = PaginateParams;
+
+type UpdateUserBody = {
+  id: number;
+  name?: string;
+  role?: string;
+};
+
+type UserPayloadType = {
+  email: string;
+  password: string;
+};

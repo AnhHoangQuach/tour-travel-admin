@@ -5,9 +5,7 @@ import { InputPassword } from 'components';
 import { useSnackbar } from 'notistack';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { signIn, signOut } from 'reducers/profileSlice';
-import { authRoute } from 'routes';
 import { authService } from 'services';
 import { RoleEnum } from 'utils/enum';
 
@@ -20,7 +18,7 @@ const LoginScreen = () => {
   const { mutate: login, isPending } = useMutation({
     mutationFn: authService.login,
     onSuccess: (data: LoginResponse) => {
-      if (data.role !== RoleEnum.USER) {
+      if (data.role !== RoleEnum.ADMIN) {
         enqueueSnackbar('Bạn không có quyền truy cập', { variant: 'error' });
         dispatch(signOut({}));
         return;
@@ -86,13 +84,6 @@ const LoginScreen = () => {
         <LoadingButton fullWidth variant='contained' loading={isPending} onClick={handleClickSubmit}>
           Đăng nhập
         </LoadingButton>
-
-        <div className='mt-[-20px] flex justify-center space-x-2'>
-          <span>Bạn chưa có tài khoản?</span>
-          <Link className='font-medium hover:text-primary-main' to={authRoute.register.url}>
-            Đăng ký
-          </Link>
-        </div>
       </Paper>
     </Container>
   );

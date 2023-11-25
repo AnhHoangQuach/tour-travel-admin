@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from './store';
-import { ProfileRecordType } from 'models/User';
 
 export const profileSlice = createSlice({
   name: 'profile',
@@ -10,18 +9,20 @@ export const profileSlice = createSlice({
   reducers: {
     signIn: (state, { payload }) => {
       const profile = { ...state, ...payload, isLoggedIn: true };
-      localStorage.setItem('profile', JSON.stringify(profile));
       return profile;
     },
     signOut: (state, { payload }) => {
-      localStorage.removeItem('profile');
       return { isLoggedIn: false };
+    },
+    update: (state, { payload }) => {
+      const profile = { ...state, ...payload };
+      return profile;
     },
   },
 });
 
-export const { signIn, signOut } = profileSlice.actions;
+export const { signIn, signOut, update: saveProfile } = profileSlice.actions;
 
 export const profileSelector = ({ profile }: RootState) => profile;
 
-export default profileSlice.reducer;
+export default profileSlice;
