@@ -1,4 +1,11 @@
-import { ArrowDropDown, ArrowLeft, DocumentScanner, SettingsOutlined, TravelExplore } from '@mui/icons-material';
+import {
+  ArrowDropDown,
+  ArrowLeft,
+  DocumentScanner,
+  NewReleases,
+  SettingsOutlined,
+  TravelExplore,
+} from '@mui/icons-material';
 import { Collapse, List, ListItemButton, ListItemText } from '@mui/material';
 import { styled } from '@mui/system';
 import { useState } from 'react';
@@ -73,6 +80,7 @@ const Menu = () => {
       <MenuItem {...privateRoute.home} icon={<SettingsOutlined />} />
       <MenuItem {...privateRoute.travel} icon={<TravelExplore />} />
       <MenuItem {...privateRoute.order} icon={<DocumentScanner />} />
+      <MenuItem {...privateRoute.new} icon={<NewReleases />} />
     </List>
   );
 };

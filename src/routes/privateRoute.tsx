@@ -1,3 +1,4 @@
+import { NewList } from 'views/New';
 import OrderList from 'views/Order/OrderList';
 import { TravelList } from 'views/Travel';
 import { UserList } from 'views/User';
@@ -17,6 +18,11 @@ const privateRoute = {
     path: '/orders',
     name: 'Danh sách orders',
     component: <OrderList />,
+  },
+  new: {
+    path: '/news',
+    name: 'Danh sách tin tức',
+    component: <NewList />,
   },
 };
 
