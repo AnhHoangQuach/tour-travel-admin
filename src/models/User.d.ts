@@ -1,5 +1,6 @@
+import { RoleEnum } from 'utils/enum';
+
 type ProfileRecordType = UserRecordType & {
-  accessToken?: string;
   isLoggedIn: boolean;
 };
 
@@ -7,34 +8,12 @@ type UserRecordType = {
   id?: string;
   createdAt?: string;
   updatedAt?: string;
-  username?: string;
-  country?: string;
-  refCode?: string;
-  balance?: number;
-  isVip?: number;
-  role?: string;
-  isActive?: boolean;
-  bankName?: string;
-  bankUserName?: string;
-  bankUserNumber?: string;
-  ip?: string;
+  name?: string;
+  role?: RoleEnum;
 };
 
 type UserPaginateType = PaginateType & {
   items: UserRecordType[];
 };
 
-type UserParams = PaginateParams & {
-  username?: string;
-  refCode?: string;
-};
-
-type UpdateUserBody = UpdateProfileBody & {
-  id: string;
-};
-
-type UserPayloadType = {
-  username: string;
-  password: string;
-  refCode: string;
-};
+type UserParams = PaginateParams;

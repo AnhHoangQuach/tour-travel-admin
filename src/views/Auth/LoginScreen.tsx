@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { signIn, signOut } from 'reducers/profileSlice';
 import { authRoute } from 'routes';
-import { authService, userService } from 'services';
+import { authService } from 'services';
 import { RoleEnum } from 'utils/enum';
 
 const LoginScreen = () => {
@@ -20,15 +20,13 @@ const LoginScreen = () => {
   const { mutate: login, isPending } = useMutation({
     mutationFn: authService.login,
     onSuccess: (data: LoginResponse) => {
+      if (data.role !== RoleEnum.USER) {
+        enqueueSnackbar('Bạn không có quyền truy cập', { variant: 'error' });
+        dispatch(signOut({}));
+        return;
+      }
+
       dispatch(signIn(data));
-      userService.getProfile().then((profile) => {
-        if (profile.role === RoleEnum.ADMIN) {
-          dispatch(signIn(profile));
-        } else {
-          enqueueSnackbar('Please login to continue as an Administrator', { variant: 'error' });
-          dispatch(signOut({}));
-        }
-      });
     },
   });
 
@@ -48,18 +46,18 @@ const LoginScreen = () => {
     <Container maxWidth='sm'>
       <Paper className='flex flex-col gap-10 p-8'>
         <Controller
-          name='username'
+          name='email'
           defaultValue=''
           control={control}
           rules={{
-            required: 'Tên tài khoản không được để trống',
+            required: 'Email không được để trống',
           }}
           render={({ field, fieldState: { error } }) => (
             <TextField
               {...field}
               fullWidth
               variant='standard'
-              label='Tên tài khoản'
+              label='Email'
               error={!!error}
               helperText={error?.message}
             />

@@ -7,12 +7,6 @@ import { signOut } from 'reducers/profileSlice';
 import { store } from 'reducers/store';
 
 const beforeRequest = (config: InternalAxiosRequestConfig) => {
-  const { isLoggedIn, accessToken }: ProfileRecordType = store.getState().profile;
-  if (isLoggedIn) {
-    Object.assign(config.headers, {
-      Authorization: `Bearer ${accessToken}`,
-    });
-  }
   try {
     if (config.data instanceof FormData) {
       Object.assign(config.headers, { 'Content-Type': 'multipart/form-data' });
@@ -44,20 +38,7 @@ client.defaults.paramsSerializer = (params) =>
   );
 
 client.interceptors.request.use(beforeRequest);
-client.interceptors.response.use((response) => {
-  const { success = 1, data, errors } = response.data;
-  if (success && !errors) return data;
-  else {
-    const message = errors ?? 'Đã có lỗi xảy ra';
-    store.dispatch(openAlert({ message, variant: 'error' }));
-
-    if (message === 'Unauthorized') {
-      store.dispatch(signOut({}));
-    }
-
-    return Promise.reject(message);
-  }
-}, onError);
+client.interceptors.response.use((response) => response.data, onError);
 
 client.defaults.transformResponse = [...(axios.defaults.transformResponse as []), (data) => camelizeKeys(data)];
 

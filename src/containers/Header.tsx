@@ -13,7 +13,7 @@ const Header = () => {
   const location = useLocation();
 
   const { isMobile } = useWindowSize();
-  const { isLoggedIn, username } = useSelector(profileSelector);
+  const { isLoggedIn, name } = useSelector(profileSelector);
 
   const [openDrawer, setOpenDrawer] = useState(false);
 
@@ -32,7 +32,7 @@ const Header = () => {
       >
         <div className='flex h-[56px] items-center justify-center'>
           <Link to={privateRoute.home.path}>
-            <span className='text-2xl font-bold text-red-500 hover:text-red-700'>HẬU ĐÀI</span>
+            <span className='text-2xl font-bold text-red-500 hover:text-red-700'>ADMIN</span>
           </Link>
         </div>
         <AppMenu />
@@ -57,7 +57,7 @@ const Header = () => {
               </Tooltip>
               <Button variant='outlined' color='warning'>
                 <Avatar className='mr-2 h-6 w-6 text-sm' />
-                {username}
+                {name}
               </Button>
             </div>
           ) : (
